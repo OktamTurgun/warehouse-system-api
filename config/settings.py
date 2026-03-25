@@ -37,6 +37,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    "rest_framework",
+    "drf_spectacular",
+    "products",
 ]
 
 MIDDLEWARE = [
@@ -48,6 +52,11 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+}
 
 ROOT_URLCONF = 'config.urls'
 
@@ -115,3 +124,32 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 STATIC_URL = 'static/'
+
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'Warehouse System API',
+    'DESCRIPTION': '''
+    ## Omborxona Tizimi REST API
+    
+    Ishlab chiqarish korxonasida mahsulot ishlab chiqarish uchun kerak bo'lgan 
+    xomashyolarni hisoblash va ombor ma'lumotidan javob olish uchun API.
+    
+    ### Asosiy imkoniyatlar:
+    - Har bir mahsulot uchun kerakli xomashyo miqdorini hisoblash
+    - Ombordagi partiyalar bo'yicha taqsimlash (FIFO)
+    - Yetishmovchi xomashyolarni ko'rsatish
+    ''',
+    'VERSION': '1.0.0',
+    'CONTACT': {
+        'name': 'Developer',
+        'email': 'your@email.com',
+    },
+    'LICENSE': {
+        'name': 'MIT License',
+    },
+    'SERVERS': [
+        {'url': 'http://127.0.0.1:8000', 'description': 'Local Development'},
+    ],
+    'TAGS': [
+        {'name': 'calculate', 'description': 'Xomashyo hisoblash operatsiyalari'},
+    ],
+}
